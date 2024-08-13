@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fff-front-ingress
+  namespace: fnc-fff
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: fff.5-42-104-196.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: front-fff
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - fff.5-42-104-196.nip.io
+    secretName: fff-front-tls

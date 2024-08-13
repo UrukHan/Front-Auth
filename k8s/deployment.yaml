@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-fff
+  namespace: fnc-fff
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-fff
+  template:
+    metadata:
+      labels:
+        app: front-fff
+    spec:
+      containers:
+      - name: front-fff
+        image: fncdev/front-fff:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+
