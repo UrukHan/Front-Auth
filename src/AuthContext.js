@@ -12,6 +12,11 @@ export const AuthProvider = ({ children }) => {
     } else {
       checkSession();
     }
+
+    // Устанавливаем интервал для проверки токена
+    const interval = setInterval(checkSession, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const checkSession = async () => {
@@ -21,10 +26,15 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         if (data.token) {
           login(data.token);
+        } else {
+          logout();
         }
+      } else {
+        logout();
       }
     } catch (error) {
       console.error('Error checking session:', error);
+      logout();
     }
   };
 
@@ -33,8 +43,13 @@ export const AuthProvider = ({ children }) => {
     setUser({ token });
   };
 
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, setUser }}>
+    <AuthContext.Provider value={{ user, login, logout, setUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Callback from './components/Callback';
 import AuthContext from './AuthContext';
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/callback" element={<Callback />} />
             <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} />} />
           </Routes>
           <div>
@@ -49,13 +47,14 @@ function App() {
 
 function HomePage({ isAuthenticated }) {
   return isAuthenticated ? (
-    <div>Welcome to the home page!</div>
-  ) : (
-    <div>
-      <h2>Welcome to our site!</h2>
-      <p>Please register or login to continue.</p>
-    </div>
-  );
-}
+      <div>Welcome to the home page!</div>
+    ) : (
+      <div>
+        <h2>Welcome to our site!</h2>
+        <p>Please register or login to continue.</p>
+      </div>
+    );
+  }
 
-export default App;
+  export default App;
+  
