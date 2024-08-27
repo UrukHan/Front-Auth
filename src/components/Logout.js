@@ -14,7 +14,7 @@ function Logout() {
 
         if (response.ok) {
           logout();
-          window.location.href = '/login';
+          window.location.href = '/login'; 
         } else {
           console.error('Failed to log out from server.');
         }
